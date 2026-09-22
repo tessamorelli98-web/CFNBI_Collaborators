@@ -141,14 +141,14 @@ html, body {
 
 <div class="title-box">
     <h1>CFNBI Collaborator Network</h1>
-    <p>30 Collaborators Across Canada and Internationally</p>
+    <p>30 Collaborator Appointments Across Canada and Internationally</p>
 </div>
 
 <div class="stats-box">
 
 <h3>Network Summary</h3>
 
-<b>30</b> Collaborators<br><br>
+<b>30</b> Collaborator Appointments<br><br>
 
 <b>14</b> Institutions<br><br>
 
@@ -177,4 +177,121 @@ University of British Columbia
 
 <script>
 
-const map = L.map
+const map = L.map("map").setView([40,-30],2);
+
+L.tileLayer(
+'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+{
+ attribution:'© OpenStreetMap © CARTO'
+}
+).addTo(map);
+
+const UBC = [49.2606,-123.2460];
+
+const collaborators = [
+
+["University of British Columbia",14,49.2606,-123.2460,"Canada"],
+
+["McMaster University",2,43.2609,-79.9192,"Canada"],
+
+["Baycrest",2,43.7330,-79.4280,"Canada"],
+
+["University of Saskatchewan",2,52.1332,-106.6700,"Canada"],
+
+["Sunnybrook Research Institute",1,43.7250,-79.3750,"Canada"],
+
+["Lund University",1,55.7047,13.1910,"Sweden"],
+
+["University of Pittsburgh",1,40.4440,-79.9600,"USA"],
+
+["University of Victoria",1,48.4634,-123.3117,"Canada"],
+
+["University of Northern British Columbia",1,53.9171,-122.7497,"Canada"],
+
+["Children's Hospital of Eastern Ontario",1,45.4010,-75.6510,"Canada"],
+
+["Université de Montréal",1,45.5050,-73.6130,"Canada"],
+
+["University of Ottawa",1,45.4236,-75.6970,"Canada"],
+
+["Vancouver Island University",1,49.1639,-123.9697,"Canada"],
+
+["Monash University",1,-37.9100,145.1340,"Australia"]
+
+];
+
+collaborators.forEach(site => {
+
+    const name = site[0];
+    const count = site[1];
+    const lat = site[2];
+    const lng = site[3];
+    const country = site[4];
+
+    let radius = 8;
+    let color = "#A5CDD7";
+
+    if(count >=10){
+        radius = 22;
+        color = "#2A7C92";
+    }
+    else if(count >=2){
+        radius = 14;
+        color = "#6BAABC";
+    }
+
+    if(name === "University of British Columbia"){
+
+        L.circle(
+            [lat,lng],
+            {
+                radius:400000,
+                color:"#2A7C92",
+                fillColor:"#2A7C92",
+                fillOpacity:0.08,
+                stroke:false
+            }
+        ).addTo(map);
+
+    }
+
+    L.circleMarker(
+        [lat,lng],
+        {
+            radius:radius,
+            color:color,
+            fillColor:color,
+            fillOpacity:0.9,
+            weight:2
+        }
+    )
+    .addTo(map)
+    .bindPopup(
+        "<b>" + name + "</b><br>" +
+        "Appointments: " + count + "<br>" +
+        country
+    );
+
+
+    if(name !== "University of British Columbia"){
+
+        L.polyline(
+            [
+                UBC,
+                [lat,lng]
+            ],
+            {
+                color:"#2A7C92",
+                weight:2,
+                opacity:0.45
+            }
+        ).addTo(map);
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
