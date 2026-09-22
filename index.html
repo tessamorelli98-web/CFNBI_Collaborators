@@ -1,25 +1,175 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>CFNBI Collaborator Network</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-   
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
+<title>CFNBI Collaborator Network</title>
 
-        #map {
-            height: 100%;
-            width: 100%;
-        }
-    </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #111;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#map {
+    width: 100%;
+    height: 100vh;
+}
+
+.title-box {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+
+    background: rgba(20,20,20,0.85);
+    color: white;
+
+    padding: 16px 24px;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(42,124,146,0.5);
+
+    backdrop-filter: blur(10px);
+
+    text-align: center;
+}
+
+.title-box h1{
+    margin:0;
+    font-size:26px;
+    color:#2A7C92;
+}
+
+.title-box p{
+    margin:6px 0 0 0;
+    color:#ddd;
+}
+
+.stats-box {
+
+    position:absolute;
+    left:20px;
+    top:120px;
+
+    z-index:1000;
+
+    background:rgba(20,20,20,0.85);
+
+    color:white;
+
+    padding:18px;
+
+    border-radius:14px;
+
+    border:1px solid rgba(42,124,146,0.5);
+
+    backdrop-filter: blur(10px);
+
+    width:240px;
+}
+
+.stats-box h3{
+    margin-top:0;
+    color:#2A7C92;
+}
+
+.legend {
+
+    position:absolute;
+    right:20px;
+    bottom:20px;
+
+    z-index:1000;
+
+    background:rgba(20,20,20,0.85);
+
+    color:white;
+
+    padding:18px;
+
+    border-radius:14px;
+
+    border:1px solid rgba(42,124,146,0.5);
+
+    backdrop-filter: blur(10px);
+}
+
+.legend h3{
+    margin-top:0;
+    color:#2A7C92;
+}
+
+.dot{
+    display:inline-block;
+    border-radius:50%;
+    margin-right:8px;
+}
+
+.low{
+    width:10px;
+    height:10px;
+    background:#A5CDD7;
+}
+
+.med{
+    width:14px;
+    height:14px;
+    background:#6BAABC;
+}
+
+.high{
+    width:18px;
+    height:18px;
+    background:#2A7C92;
+}
+
+</style>
+
 </head>
 
 <body>
+
+<div class="title-box">
+    <h1>CFNBI Collaborator Network</h1>
+    <p>30 Collaborators Across Canada and Internationally</p>
+</div>
+
+<div class="stats-box">
+
+<h3>Network Summary</h3>
+
+<b>30</b> Collaborators<br><br>
+
+<b>14</b> Institutions<br><br>
+
+<b>4</b> Countries<br><br>
+
+<b>Hub:</b><br>
+University of British Columbia
+
+</div>
+
+<div class="legend">
+
+<h3>Density</h3>
+
+<div><span class="dot high"></span> High Concentration</div><br>
+
+<div><span class="dot med"></span> Moderate Concentration</div><br>
+
+<div><span class="dot low"></span> Individual Collaborator</div>
+
+</div>
 
 <div id="map"></div>
 
@@ -27,20 +177,4 @@
 
 <script>
 
-const map = L.map('map').setView([49.2827, -123.1207], 3);
-
-L.tileLayer(
-    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-        attribution: '&copy; OpenStreetMap contributors'
-    }
-).addTo(map);
-
-L.marker([49.2827, -123.1207])
-.addTo(map)
-.bindPopup('CFNBI');
-
-</script>
-
-</body>
-</html>
+const map = L.map
