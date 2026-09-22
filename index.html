@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CFNBI Collaborator Network</title>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link://unpkg.com/leaflet@1.9.4/dist/leaflet.css
 
- 0;
+<style>
+html, body {
+    margin: 0;
     padding: 0;
     height: 100%;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 #map {
-    height: 100vh;
     width: 100%;
+    height: 100vh;
 }
 
 .title-box {
@@ -25,32 +28,30 @@
     z-index: 1000;
     background: white;
     padding: 12px 20px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     text-align: center;
 }
 
-.title-box h1 {
+.title-box h2 {
     margin: 0;
     color: #2A7C92;
-    font-size: 26px;
 }
 
 .title-box p {
     margin: 4px 0 0 0;
-    color: #555;
-    font-size: 14px;
+    color: #666;
 }
 
 .stats-box {
     position: absolute;
-    top: 100px;
+    top: 120px;
     left: 15px;
     z-index: 1000;
     background: white;
     padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     width: 220px;
 }
 
@@ -61,42 +62,50 @@
 
 .legend {
     position: absolute;
-    bottom: 30px;
-    right: 15px;
+    bottom: 20px;
+    right: 20px;
     z-index: 1000;
     background: white;
     padding: 12px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-.legend-title {
-    font-weight: bold;
-    margin-bottom: 8px;
+.legend h4 {
+    margin-top: 0;
+    color: #2A7C92;
 }
 
-.legend-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.legend-color {
-    width: 18px;
-    height: 18px;
+.dot {
+    display: inline-block;
+    border-radius: 50%;
     margin-right: 8px;
 }
 
-.low { background:#A5CDD7; }
-.med { background:#6BAABC; }
-.high { background:#2A7C92; }
-</style>
-</head>
+.low {
+    width: 12px;
+    height: 12px;
+    background: #A5CDD7;
+}
 
+.med {
+    width: 16px;
+    height: 16px;
+    background: #6BAABC;
+}
+
+.high {
+    width: 20px;
+    height: 20px;
+    background: #2A7C92;
+}
+</style>
+
+</head>
 <body>
 
 <div class="title-box">
-    <h1>CFNBI Collaborator Network</h1>
+    <h2>CFNBI Collaborator Network</h2>
     <p>30 Collaborator Appointments Across Canada and Internationally</p>
 </div>
 
@@ -104,191 +113,5 @@
     <h3>Network Summary</h3>
     <b>30</b> Collaborator Appointments<br><br>
     <b>14</b> Institutions<br><br>
-    Canada • USA • Sweden • Australia
-</div>
-
-<div class="legend">
-    <div class="legend-title">Collaborator Density</div>
-
-    <div class="legend-item">
-        <div class="legend-color low"></div>
-        Individual Collaborators
-    </div>
-
-    <div class="legend-item">
-        <div class="legend-color med"></div>
-        Moderate Concentration
-    </div>
-
-    <div class="legend-item">
-        <div class="legend-color high"></div>
-        High Concentration
-    </div>
-</div>
-
-<div id="map"></div>
-
-https://unpkg.com/leaflet@1.9.4/dist/leaflet.jsscript>
-
-<script>
-
-var map = L.map('map').setView([35, -20], 2);
-
-L.tileLayer(
-'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-{
-    attribution: '&copy; OpenStreetMap contributors'
-}
-).addTo(map);
-
-const collaborators = [
-
-{
-name: "University of British Columbia",
-count: 14,
-lat: 49.2606,
-lng: -123.2460,
-country: "Canada"
-},
-
-{
-name: "McMaster University",
-count: 2,
-lat: 43.2609,
-lng: -79.9192,
-country: "Canada"
-},
-
-{
-name: "Baycrest",
-count: 2,
-lat: 43.733,
-lng: -79.428,
-country: "Canada"
-},
-
-{
-name: "University of Saskatchewan",
-count: 2,
-lat: 52.1332,
-lng: -106.670,
-country: "Canada"
-},
-
-{
-name: "Sunnybrook Research Institute",
-count: 1,
-lat: 43.725,
-lng: -79.375,
-country: "Canada"
-},
-
-{
-name: "Lund University",
-count: 1,
-lat: 55.7047,
-lng: 13.191,
-country: "Sweden"
-},
-
-{
-name: "University of Pittsburgh",
-count: 1,
-lat: 40.444,
-lng: -79.96,
-country: "USA"
-},
-
-{
-name: "University of Victoria",
-count: 1,
-lat: 48.4634,
-lng: -123.3117,
-country: "Canada"
-},
-
-{
-name: "University of Northern British Columbia",
-count: 1,
-lat: 53.9171,
-lng: -122.7497,
-country: "Canada"
-},
-
-{
-name: "Children's Hospital of Eastern Ontario",
-count: 1,
-lat: 45.401,
-lng: -75.651,
-country: "Canada"
-},
-
-{
-name: "Université de Montréal",
-count: 1,
-lat: 45.505,
-lng: -73.613,
-country: "Canada"
-},
-
-{
-name: "University of Ottawa",
-count: 1,
-lat: 45.4236,
-lng: -75.697,
-country: "Canada"
-},
-
-{
-name: "Vancouver Island University",
-count: 1,
-lat: 49.1639,
-lng: -123.9697,
-country: "Canada"
-},
-
-{
-name: "Monash University",
-count: 1,
-lat: -37.91,
-lng: 145.134,
-country: "Australia"
-}
-
-];
-
-collaborators.forEach(function(site){
-
-    let radius = 10 + (site.count * 4);
-
-    let color = "#A5CDD7";
-
-    if(site.count >= 10){
-        color = "#2A7C92";
-    }
-    else if(site.count >= 2){
-        color = "#6BAABC";
-    }
-
-    L.circleMarker(
-        [site.lat, site.lng],
-        {
-            radius: radius,
-            color: color,
-            fillColor: color,
-            fillOpacity: 0.7,
-            weight: 2
-        }
-    )
-    .bindPopup(
-        "<b>" + site.name + "</b><br><br>" +
-        "Collaborator Appointments: " + site.count + "<br>" +
-        "Country: " + site.country
-    )
-    .addTo(map);
-});
-
-</script>
-
-</body>
-</html>
+    <b>4</b> Countries<br><br>
+  
